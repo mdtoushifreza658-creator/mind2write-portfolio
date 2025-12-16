@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIND2WRITE - Creative Developer Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #0a0a0a;
+    overflow-x: hidden;
+    min-height: 100vh;
+    color: white;
+}
+
+/* Particle Canvas */
+#particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Container */
+.container {
+    display: flex;
+    width: 90%;
+    max-width: 1400px;
+    margin: auto;
+    min-height: 100vh;
+    gap: 50px;
+    padding: 40px 20px;
+    align-items: center;
+}
+
+/* LEFT PANEL */
+.left-panel {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+    animation: slideInLeft 1s ease;
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.name {
+    font-size: 64px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #00ffff 0%, #00d4ff 50%, #0099ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -2px;
+    animation: glow 3s ease-in-out infinite alternate;
+    line-height: 1.1;
+}
+
+@keyframes glow {
+    from { filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.6)); }
+    to { filter: drop-shadow(0 0 30px rgba(0, 255, 255, 0.9)); }
+}
+
+.tagline {
+    font-size: 18px;
+    color: #888;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: -10px;
+}
+
+.role {
+    font-size: 36px;
+    color: #fff;
+    min-height: 45px;
+    font-weight: 500;
+}
+
+#typed-role {
+    color: #00ffff;
+    border-right: 3px solid #00ffff;
+    padding-right: 8px;
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: #00ffff; }
+}
+
+.intro {
+    font-size: 18px;
+    color: #bbb;
+    line-height: 1.8;
+    max-width: 95%;
+    font-weight: 300;
+}
+
+.btn-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.btn {
+    padding: 16px 36px;
+    background: linear-gradient(135deg, #00ffff, #00d4ff);
+    border: none;
+    border-radius: 50px;
+    color: #000;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 20px rgba(0, 255, 255, 0.4);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 400px;
+    height: 400px;
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 35px rgba(0, 255, 255, 0.6);
+}
+
+.btn span {
+    position: relative;
+    z-index: 1;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 2px solid #00ffff;
+    color: #00ffff;
+}
+
+.btn-secondary:hover {
+    background: rgba(0, 255, 255, 0.15);
+    transform: translateY(-4px);
+}
+
+/* Stats Section */
+.stats-section {
+    display: flex;
+    gap: 30px;
+    margin-top: 15px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-number {
+    font-size: 36px;
+    font-weight: 700;
+    color: #00ffff;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #888;
+    margin-top: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* RIGHT PANEL */
+.right-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    animation: slideInRight 1s ease;
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* PHOTO CARD */
+.photo-card {
+    width: 100%;
+    height: 450px;
+    border-radius: 24px;
+    background: rgba(0, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(0, 255, 255, 0.2);
+    box-shadow: 0 10px 40px rgba(0, 255, 255, 0.25);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.1s ease;
+    position: relative;
+}
+
+.photo-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.05), transparent);
+    transform: rotate(45deg);
+    animation: shine 4s infinite;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 24px;
+}
+
+.photo-placeholder {
+    font-size: 120px;
+    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.3));
+}
+
+/* CONTACT CARD */
+.contact-card {
+    width: 100%;
+    padding: 30px;
+    border-radius: 24px;
+    background: rgba(0, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(0, 255, 255, 0.2);
+    box-shadow: 0 10px 40px rgba(0, 255, 255, 0.2);
+    transition: all 0.4s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 50px rgba(0, 255, 255, 0.35);
+    border-color: rgba(0, 255, 255, 0.4);
+}
+
+.contact-card h3 {
+    margin-bottom: 25px;
+    font-size: 26px;
+    color: #00ffff;
+    font-weight: 600;
+}
+
+.contacts {
+    display: grid;
+    gap: 12px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+    color: #fff;
+    padding: 16px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.contact-item:hover {
+    background: rgba(0, 255, 255, 0.1);
+    transform: translateX(8px);
+    border-color: rgba(0, 255, 255, 0.3);
+}
+
+.contact-icon {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 255, 255, 0.1);
+    border-radius: 10px;
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.contact-item:hover .contact-icon {
+    background: rgba(0, 255, 255, 0.2);
+    transform: scale(1.1) rotate(5deg);
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.contact-label {
+    font-size: 12px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.contact-value {
+    font-size: 15px;
+    color: #fff;
+    font-weight: 500;
+}
+
+/* SKILLS SECTION */
+.skills-card {
+    width: 100%;
+    padding: 30px;
+    border-radius: 24px;
+    background: rgba(0, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(0, 255, 255, 0.2);
+    box-shadow: 0 10px 40px rgba(0, 255, 255, 0.2);
+}
+
+.skills-card h3 {
+    font-size: 26px;
+    color: #00ffff;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.skill-tag {
+    padding: 10px 20px;
+    background: rgba(0, 255, 255, 0.08);
+    border: 1px solid rgba(0, 255, 255, 0.25);
+    border-radius: 25px;
+    color: #00ffff;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.skill-tag:hover {
+    background: rgba(0, 255, 255, 0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 255, 255, 0.3);
+    border-color: rgba(0, 255, 255, 0.5);
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 900px) {
+    .container {
+        flex-direction: column;
+        padding: 30px 15px;
+        gap: 40px;
+    }
+    
+    .left-panel, .right-panel {
+        flex: 1;
+    }
+    
+    .name {
+        font-size: 48px;
+    }
+    
+    .role {
+        font-size: 28px;
+    }
+    
+    .intro {
+        max-width: 100%;
+        font-size: 16px;
+    }
+    
+    .photo-card {
+        height: 350px;
+    }
+    
+    .stats-section {
+        gap: 20px;
+    }
+    
+    .stat-number {
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .name {
+        font-size: 36px;
+    }
+    
+    .tagline {
+        font-size: 14px;
+    }
+    
+    .role {
+        font-size: 22px;
+    }
+    
+    .intro {
+        font-size: 15px;
+    }
+    
+    .photo-card {
+        height: 280px;
+    }
+    
+    .btn-group {
+        width: 100%;
+    }
+    
+    .btn {
+        flex: 1;
+        padding: 14px 24px;
+        font-size: 14px;
+    }
+    
+    .stats-section {
+        flex-wrap: wrap;
+    }
+}
+
+/* Loading Animation */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0a0a0a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+.loader.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(0, 255, 255, 0.2);
+    border-top-color: #00ffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: rgba(0, 255, 255, 0.6);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+.scroll-indicator::after {
+    content: '↓';
+    font-size: 24px;
+}
+
+@media screen and (max-width: 900px) {
+    .scroll-indicator {
+        display: none;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div class="loader" id="loader">
+    <div class="spinner"></div>
+</div>
+
+<!-- Floating Particles Background -->
+<canvas id="particles"></canvas>
+
+<div class="container">
+
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+        <div class="tagline">Creative Developer</div>
+        <h1 class="name">MIND2WRITE</h1>
+        <h2 class="role"><span id="typed-role"></span></h2>
+        <p class="intro">
+            Passionate developer crafting modern, interactive digital experiences. Specializing in full-stack development, Android apps, and stunning UI/UX design that brings ideas to life.
+        </p>
+        
+        <div class="btn-group">
+            <button class="btn" onclick="alert('Contact me at: your@email.com')">
+                <span>Hire Me</span>
+            </button>
+            <button class="btn btn-secondary" onclick="alert('Projects section coming soon!')">
+                <span>View Work</span>
+            </button>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-section">
+            <div class="stat-item">
+                <div class="stat-number">10+</div>
+                <div class="stat-label">Projects</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">2+</div>
+                <div class="stat-label">Years Exp</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Happy Clients</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+        <!-- Profile Image Card -->
+        <div class="photo-card" id="photo-card">
+            <!-- Replace with your image: <img src="yourimage.jpg" alt="MIND2WRITE Profile"> -->
+            <div class="photo-placeholder">
+                <img scr="" alt="MIND2WRITE">
+              
+            </div>
+        </div>
+
+        <!-- Skills Card -->
+        <div class="skills-card">
+            <h3>Tech Stack</h3>
+            <div class="skills">
+                <span class="skill-tag">Android</span>
+                <span class="skill-tag">Kotlin</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Firebase</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">UI/UX</span>
+            </div>
+        </div>
+        
+        <!-- Contact Card -->
+        <div class="contact-card">
+            <h3>Let's Connect</h3>
+            <div class="contacts">
+                <a href="#" onclick="navigator.clipboard.writeText('mdtoushifreza658@gmail.com'); alert('Email copied!');" class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-details">
+                        <div class="contact-label">Email</div>
+                        <div class="contact-value">mdtoushifreza658@gmail.com</div>
+                    </div>
+                </a>
+                <a href="https://github.com/mdtoushifreza658-creator" target="_blank" class="contact-item">
+                    <div class="contact-icon">💻</div>
+                    <div class="contact-details">
+                        <div class="contact-label">GitHub</div>
+                        <div class="contact-value">Github</div>
+                    </div>
+                </a>
+                <a href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BYXLkLY4ZQAapqS8NWedwMg%3D%3D" target="_blank" class="contact-item">
+                    <div class="contact-icon">💼</div>
+                    <div class="contact-details">
+                        <div class="contact-label">LinkedIn</div>
+                        <div class="contact-value">Linkedin</div>
+                    </div>
+                </a>
+               <a href="https://wa.me/918967077579" target="_blank" class="contact-item">
+    <div class="contact-icon">💬</div>
+    <div class="contact-details">
+        <div class="contact-label">WhatsApp</div>
+        <div class="contact-value">+91 89670 77579 </div>
+    </div>
+</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Scroll Indicator -->
+<div class="scroll-indicator">Scroll</div>
+
+<script>
+// LOADING SCREEN
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.getElementById('loader').classList.add('hidden');
+    }, 800);
+});
+
+// TYPING EFFECT
+const roles = ["Full-Stack Developer", "Android Developer", "Python Developer", "UI/UX Designer"];
+let index = 0;
+let charIndex = 0;
+const typedRole = document.getElementById("typed-role");
+
+function typeRole() {
+    if (charIndex < roles[index].length) {
+        typedRole.innerHTML += roles[index].charAt(charIndex);
+        charIndex++;
+        setTimeout(typeRole, 100);
+    } else {
+        setTimeout(eraseRole, 2500);
+    }
+}
+
+function eraseRole() {
+    if (charIndex > 0) {
+        typedRole.innerHTML = roles[index].substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(eraseRole, 50);
+    } else {
+        index = (index + 1) % roles.length;
+        setTimeout(typeRole, 500);
+    }
+}
+
+typeRole();
+
+// PHOTO CARD 3D TILT EFFECT
+const photoCard = document.getElementById("photo-card");
+photoCard.addEventListener("mousemove", (e) => {
+    const rect = photoCard.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) / 15;
+    const y = (e.clientY - rect.top - rect.height / 2) / 15;
+    photoCard.style.transform = `perspective(1000px) rotateY(${x}deg) rotateX(${-y}deg) scale3d(1.02, 1.02, 1.02)`;
+});
+
+photoCard.addEventListener("mouseleave", () => {
+    photoCard.style.transform = "perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)";
+});
+
+// PARTICLE BACKGROUND
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const particlesArray = [];
+const particleCount = window.innerWidth < 768 ? 40 : 80;
+
+class Particle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = Math.random() * 0.8 - 0.4;
+        this.speedY = Math.random() * 0.8 - 0.4;
+        this.opacity = Math.random() * 0.5 + 0.3;
+    }
+    
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+        if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+    }
+    
+    draw() {
+        ctx.fillStyle = `rgba(0, 255, 255, ${this.opacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+function initParticles() {
+    particlesArray.length = 0;
+    for (let i = 0; i < particleCount; i++) {
+        particlesArray.push(new Particle());
+    }
+}
+
+initParticles();
+
+function connectParticles() {
+    for (let a = 0; a < particlesArray.length; a++) {
+        for (let b = a + 1; b < particlesArray.length; b++) {
+            const dx = particlesArray[a].x - particlesArray[b].x;
+            const dy = particlesArray[a].y - particlesArray[b].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < 120) {
+                ctx.strokeStyle = `rgba(0, 255, 255, ${0.15 * (1 - distance / 120)})`;
+                ctx.lineWidth = 0.5;
+                ctx.beginPath();
+                ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                ctx.stroke();
+            }
+        }
+    }
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
+    }
+    
+    connectParticles();
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    initParticles();
+});
+</script>
+</body>
+</html>
